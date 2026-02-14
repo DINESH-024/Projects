@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>❤️ Happy Valentine's Day ❤️</title>
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #1a0a1a 0%, #2d1b2e 50%, #1a0a1a 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Floating hearts background */
+  .hearts-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .heart-bg {
+    position: absolute;
+    color: rgba(255, 182, 193, 0.3);
+    font-size: 20px;
+    animation: floatUp 8s linear infinite;
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-100px) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Rose petals */
+  .petals {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .petal {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(45deg, #ff6b6b, #ff8e8e, #ffb6c1);
+    border-radius: 100% 0% 100% 0%;
+    animation: fall 10s linear infinite;
+    opacity: 0.8;
+  }
+
+  .petal:nth-child(odd) {
+    background: linear-gradient(45deg, #ff4757, #ff6b81);
+  }
+
+  .petal:nth-child(3n) {
+    background: linear-gradient(45deg, #e84393, #fd79a8);
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-100px) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.8;
+    }
+    90% {
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(100vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  .card {
+    background: linear-gradient(145deg, #fff5f5, #ffffff);
+    width: 380px;
+    padding: 35px 30px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(255, 0, 80, 0.3),
+                0 0 100px rgba(255, 182, 193, 0.2);
+    animation: fadeUp 1.5s ease, gentlePulse 3s ease-in-out infinite;
+    position: relative;
+    z-index: 10;
+    border: 2px solid rgba(255, 182, 193, 0.3);
+  }
+
+  @keyframes gentlePulse {
+    0%, 100% {
+      box-shadow: 0 25px 50px rgba(255, 0, 80, 0.3),
+                  0 0 100px rgba(255, 182, 193, 0.2);
+    }
+    50% {
+      box-shadow: 0 25px 50px rgba(255, 0, 80, 0.4),
+                  0 0 120px rgba(255, 182, 193, 0.3);
+    }
+  }
+
+  .valentine-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6b6b, #e84393);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    animation: shimmer 2s ease-in-out infinite;
+    text-transform: uppercase;
+  }
+
+  @keyframes shimmer {
+    0%, 100% {
+      background: linear-gradient(135deg, #ff6b6b, #e84393);
+    }
+    50% {
+      background: linear-gradient(135deg, #e84393, #ff6b6b);
+    }
+  }
+
+  h1 {
+    color: #e63946;
+    margin-bottom: 5px;
+    font-size: 36px;
+    animation: softGlow 3s infinite alternate;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .Moments {
+    text-align: left;
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 5px;
+  }
+
+  .Moments::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .Moments::-webkit-scrollbar-track {
+    background: #ffe5e5;
+    border-radius: 2px;
+  }
+
+  .Moments::-webkit-scrollbar-thumb {
+    background: #ff6b6b;
+    border-radius: 2px;
+  }
+
+  .Moments p {
+    font-size: 14px;
+    color: #444;
+    line-height: 1.8;
+    margin: 14px 0;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+
+  .Moments p:nth-child(n) {
+    animation-delay: calc(var(--i) * 0.4s);
+  }
+
+  .signature {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #666;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+    animation-delay: 8s;
+    font-weight: 500;
+  }
+
+  .signature span {
+    color: #e63946;
+    font-size: 18px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  @keyframes softGlow {
+    from { text-shadow: 0 0 5px #e63946; }
+    to { text-shadow: 0 0 20px #ff6b6b, 0 0 30px #ffb6c1; }
+  }
+
+  /* Valentine button */
+  .valentine-btn {
+    margin-top: 20px;
+    padding: 15px 40px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #ff6b6b, #e84393);
+    color: white;
+    cursor: pointer;
+    animation: pulse 2s ease-in-out infinite, fadeIn 1s forwards;
+    animation-delay: 8s, 8s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(232, 67, 147, 0.4);
+  }
+
+  .valentine-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(232, 67, 147, 0.6);
+  }
+
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.02);
+    }
+  }
+
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.5s ease;
+  }
+
+  .modal.show {
+    display: flex;
+  }
+
+  .modal-content {
+    background: linear-gradient(145deg, #fff5f5, #ffffff);
+    padding: 40px;
+    border-radius: 25px;
+    text-align: center;
+    max-width: 350px;
+    position: relative;
+    animation: popIn 0.5s ease;
+    border: 3px solid #ff6b6b;
+    box-shadow: 0 0 50px rgba(255, 107, 107, 0.5);
+  }
+
+  @keyframes popIn {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    70% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .modal-content h2 {
+    color: #e63946;
+    font-size: 28px;
+    margin-bottom: 15px;
+  }
+
+  .modal-content p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    color: #999;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+
+  .close-btn:hover {
+    color: #e63946;
+  }
+
+  .heart-large {
+    font-size: 60px;
+    animation: heartbeat 1s ease-in-out infinite;
+    margin-bottom: 15px;
+  }
+
+  @keyframes heartbeat {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  /* Photo frame effect */
+  .photo-frame {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 15px;
+    border-radius: 50%;
+    border: 4px solid #ff6b6b;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ffe5e5, #fff5f5);
+  }
+
+  .photo-frame span {
+    font-size: 50px;
+  }
+
+  /* Decorative elements */
+  .sparkles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+  }
+
+  .sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ffd700;
+    border-radius: 50%;
+    animation: sparkle 2s ease-in-out infinite;
+  }
+
+  @keyframes sparkle {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(0);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Date display */
+  .date-display {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: rgba(255, 182, 193, 0.5);
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  /* Rose icon */
+  .rose-icon {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 30px;
+    animation: sway 3s ease-in-out infinite;
+  }
+
+  @keyframes sway {
+    0%, 100% {
+      transform: rotate(-5deg);
+    }
+    50% {
+      transform: rotate(5deg);
+    }
+  }
+
+  /* Cupid */
+  .cupid {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    font-size: 24px;
+    animation: fly 4s ease-in-out infinite;
+  }
+
+  @keyframes fly {
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(10px, -10px);
+    }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Floating hearts background -->
+<div class="hearts-bg" id="heartsBg"></div>
+
+<!-- Rose petals -->
+<div class="petals" id="petals"></div>
+
+<!-- Decorative elements -->
+<div class="sparkles" id="sparkles"></div>
+
+<div class="date-display">❤️ Feb 14, 2025 ❤️</div>
+<div class="cupid">👼</div>
+<div class="rose-icon">🌹</div>
+
+<div class="card">
+
+  
+  <div class="photo-frame">
+    <span>💝</span>
+  </div>
+  
+  <h1>To You, ❤️</h1>
+  <div class="subtitle">My Heart Speaks...</div>
+
+  <div class="Moments">
+
+    <p style="--i:1">
+      Before this,<br>
+      we were just classmates 🙂<br>
+      Everything felt normal.
+    </p>
+
+    <p style="--i:2">
+      But one moment changed something.<br>
+      It played like a movie in my mind 🎞️<br>
+      Again and again.
+    </p>
+
+    <p style="--i:3">
+      It was not just a simple day,<br>
+      not a random second.<br>
+      Something quietly changed inside me.
+    </p>
+
+    <p style="--i:4">
+      The sun touched your curly hair,<br>
+      and it shined so softly ✨<br>
+      That moment felt special,<br>
+      and I couldn't take my eyes off you.
+    </p>
+
+    <p style="--i:5">
+      I didn't know why then,<br>
+      but my mind paused,<br>
+      and my heart noticed 💭❤️
+    </p>
+
+    <p style="--i:6">
+      I wanted to know you more.<br>
+      Not just as a classmate,<br>
+      but as someone special.
+    </p>
+
+    <p style="--i:7">
+      I found an excuse to talk to you.<br>
+      On Voters' Day, I spoke to you for the first time 🗳️<br>
+      I was nervous,<br>
+      but you were so friendly 🙂
+    </p>
+
+    <p style="--i:8">
+      From that moment, we started talking.<br>
+      We still talk,<br>
+      and I hope we always will 🤍
+    </p>
+
+    <p style="--i:9">
+      There are many things I want to say,<br>
+      but sometimes I stay silent.<br>
+      I'm afraid it might change everything.
+    </p>
+
+    <p style="--i:10">
+      You know what this is.<br>
+      We faced ups and downs.<br>
+      You were there for me —<br>
+      not as a lover,<br>
+      but as a true friend 🤝
+    </p>
+
+    <p style="--i:11">
+      That's when I realized,<br>
+      you are someone who truly cares.
+    </p>
+
+    <p style="--i:12">
+      I respect your feelings 🌱<br>
+      Even when love was not your choice.
+    </p>
+
+    <p style="--i:13">
+      One day, I gave you a rose plant 🌹<br>
+      not as a romantic gesture,
+    </p>
+
+    <p style="--i:14">
+      A rose plant in my hands,<br>
+      not as a symbol of love,<br>
+      but as a symbol of care.
+    </p>
+
+    <p style="--i:15">
+      I hoped it would grow and bloom 🌿<br>
+      I felt so happy when you smiled<br>
+      and said it was cute 😊
+    </p>
+
+    <p style="--i:16">
+      I thought that was the end,<br>
+      but it wasn't.<br>
+      It was just the beginning.
+    </p>
+
+    <p style="--i:17">
+      One moment.<br>
+      One look.<br>
+      One second.<br>
+      It changed everything ✨
+    </p>
+
+    <p style="--i:18">
+      Your rose plant is growing well 🌹<br>
+      A reminder of that moment,<br>
+      and the feelings that learned to grow.
+    </p>
+
+    <p style="--i:19">
+      Maybe this isn't a love story yet,<br>
+      but it's where my feelings<br>
+      started to bloom 🌸
+    </p>
+
+    <p style="--i:20">
+      On this Valentine's Day,<br>
+      I want to say...<br>
+      You mean the world to me 💖
+    </p>
+
+  </div>
+
+  <button class="valentine-btn" onclick="showModal()">
+    💕 Be My Valentine 💕
+  </button>
+
+  <div class="signature">
+    — Dinesh <span>🤍💫</span>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="valentineModal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <div class="heart-large">❤️</div>
+    <h2>My Dearest,</h2>
+    <p>
+      Every moment with you has been a blessing. 
+      You are not just someone I admire, 
+      you are my inspiration, my joy, my everything. 💕
+      <br><br>
+      Will you be my Valentine? 💝
+    </p>
+    <div class="heart-large">💖</div>
+  </div>
+</div>
+
+<script>
+  // Set variable for paragraphs
+  let i = 0;
+  document.querySelectorAll('.Moments p').forEach(p => {
+    p.style.setProperty('--i', ++i);
+  });
+
+  // Floating hearts background
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.className = 'heart-bg';
+    heart.innerHTML = ['❤', '💕', '💖', '💗', '🤍'][Math.floor(Math.random() * 5)];
+    heart.style.left = Math.random() * 100 + '%';
+    heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+    heart.style.animationDuration = (Math.random() * 5 + 6) + 's';
+    heart.style.animationDelay = Math.random() * 5 + 's';
+    document.getElementById('heartsBg').appendChild(heart);
+    
+    setTimeout(() => heart.remove(), 12000);
+  }
+
+  setInterval(createHeart, 800);
+
+  // Rose petals
+  function createPetal() {
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+    petal.style.left = Math.random() * 100 + '%';
+    petal.style.animationDuration = (Math.random() * 5 + 8) + 's';
+    petal.style.animationDelay = Math.random() * 5 + 's';
+    petal.style.opacity = Math.random() * 0.5 + 0.3;
+    petal.style.transform = `rotate(${Math.random() * 360}deg)`;
+    document.getElementById('petals').appendChild(petal);
+    
+    setTimeout(() => petal.remove(), 15000);
+  }
+
+  setInterval(createPetal, 400);
+
+  // Sparkles
+  function createSparkle() {
+    const sparkle = document.createElement('div');
+    sparkle.className = 'sparkle';
+    sparkle.style.left = Math.random() * 100 + '%';
+    sparkle.style.top = Math.random() * 100 + '%';
+    sparkle.style.animationDelay = Math.random() * 2 + 's';
+    document.getElementById('sparkles').appendChild(sparkle);
+    
+    setTimeout(() => sparkle.remove(), 4000);
+  }
+
+  setInterval(createSparkle, 500);
+
+  // Modal functions
+  function showModal() {
+    document.getElementById('valentineModal').classList.add('show');
+    createConfetti();
+  }
+
+  function closeModal() {
+    document.getElementById('valentineModal').classList.remove('show');
+  }
+
+  // Close modal when clicking outside
+  document.getElementById('valentineModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+      closeModal();
+    }
+  });
+
+  // Confetti effect for modal
+  function createConfetti() {
+    const colors = ['#ff6b6b', '#e84393', '#ffd700', '#ff8e8e', '#ffb6c1'];
+    
+    for (let i = 0; i < 50; i++) {
+      setTimeout(() => {
+        const confetti = document.createElement('div');
+        confetti.style.cssText = `
+          position: fixed;
+          width: 10px;
+          height: 10px;
+          background: ${colors[Math.floor(Math.random() * colors.length)]};
+          left: ${Math.random() * 100}%;
+          top: -10px;
+          z-index: 1001;
+          animation: confettiFall ${Math.random() * 2 + 2}s linear forwards;
+        `;
+        document.body.appendChild(confetti);
+        
+        setTimeout(() => confetti.remove(), 4000);
+      }, i * 50);
+    }
+  }
+
+  // Add confetti animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Keyboard support
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  });
+</script>
+
+</body>
+</html>
